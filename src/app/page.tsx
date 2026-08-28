@@ -215,14 +215,11 @@ export default function Home() {
 
       {/* HERO SECTION */}
       <section className="hero-sec">
-        <video
+        <iframe
           className="hero-bg-video"
-          src="/herovideo.MP4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          poster="/images/hero_bg.jpg"
+          src="https://www.youtube.com/embed/FOOWnn6eDZU?autoplay=1&mute=1&loop=1&playlist=FOOWnn6eDZU&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+          title="Heaven Furniture Mart Background"
         />
         <div className="hero-bg-overlay" />
         <div className="container" style={{ position: "relative", zIndex: 10 }}>
