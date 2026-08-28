@@ -297,6 +297,7 @@ export default function Home() {
                 alt="Heaven Furniture Mart custom luxurious sofa set and coffee table"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
+                priority
               />
               <div className="accordion-panel-overlay" />
               <div className="accordion-panel-content">
@@ -335,6 +336,7 @@ export default function Home() {
                 alt="Heaven Furniture Mart custom solid wood bed, wardrobe, and modern nightstands"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
+                priority
               />
               <div className="accordion-panel-overlay" />
               <div className="accordion-panel-content">
@@ -373,6 +375,7 @@ export default function Home() {
                 alt="Heaven Furniture Mart bespoke solid teak wooden dining table and luxury dining chairs set"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
+                priority
               />
               <div className="accordion-panel-overlay" />
               <div className="accordion-panel-content">
@@ -411,6 +414,7 @@ export default function Home() {
                 alt="Heaven Furniture Mart custom executive desk and custom study room workstation"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
+                priority
               />
               <div className="accordion-panel-overlay" />
               <div className="accordion-panel-content">
@@ -882,7 +886,7 @@ export default function Home() {
                       height={400}
                       sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
                       style={{ width: "100%", height: "auto" }}
-                      loading="lazy"
+                      priority={index < 8}
                     />
                   </div>
                 );
