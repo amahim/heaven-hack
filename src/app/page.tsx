@@ -291,7 +291,11 @@ export default function Home() {
             {/* Living Room */}
             <div
               className={`accordion-panel ${activeCollection === 0 ? "active" : ""}`}
-              onMouseEnter={() => setActiveCollection(0)}
+              onMouseEnter={() => {
+                if (window.matchMedia("(hover: hover)").matches) {
+                  setActiveCollection(0);
+                }
+              }}
               onClick={() => {
                 if (activeCollection === 0) {
                   openGallery("living");
@@ -333,7 +337,11 @@ export default function Home() {
             {/* Bedroom */}
             <div
               className={`accordion-panel ${activeCollection === 1 ? "active" : ""}`}
-              onMouseEnter={() => setActiveCollection(1)}
+              onMouseEnter={() => {
+                if (window.matchMedia("(hover: hover)").matches) {
+                  setActiveCollection(1);
+                }
+              }}
               onClick={() => {
                 if (activeCollection === 1) {
                   openGallery("bedroom");
@@ -375,7 +383,11 @@ export default function Home() {
             {/* Dining */}
             <div
               className={`accordion-panel ${activeCollection === 2 ? "active" : ""}`}
-              onMouseEnter={() => setActiveCollection(2)}
+              onMouseEnter={() => {
+                if (window.matchMedia("(hover: hover)").matches) {
+                  setActiveCollection(2);
+                }
+              }}
               onClick={() => {
                 if (activeCollection === 2) {
                   openGallery("dining");
@@ -417,7 +429,11 @@ export default function Home() {
             {/* Custom/Office */}
             <div
               className={`accordion-panel ${activeCollection === 3 ? "active" : ""}`}
-              onMouseEnter={() => setActiveCollection(3)}
+              onMouseEnter={() => {
+                if (window.matchMedia("(hover: hover)").matches) {
+                  setActiveCollection(3);
+                }
+              }}
               onClick={() => {
                 if (activeCollection === 3) {
                   openGallery("custom");
