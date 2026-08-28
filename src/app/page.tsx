@@ -217,7 +217,7 @@ export default function Home() {
       <section className="hero-sec">
         <video
           className="hero-bg-video desktop-video"
-          src="/herovideoBig.mp4"
+          src="https://res.cloudinary.com/dpd5gh6hq/video/upload/v1787938803/herovideoBig.mp4"
           autoPlay
           loop
           muted
@@ -225,7 +225,7 @@ export default function Home() {
         />
         <video
           className="hero-bg-video mobile-video"
-          src="/herovideosmall.mp4"
+          src="https://res.cloudinary.com/dpd5gh6hq/video/upload/v1787938804/herovideosmall.mp4"
           autoPlay
           loop
           muted
