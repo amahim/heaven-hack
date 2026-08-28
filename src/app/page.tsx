@@ -281,11 +281,12 @@ export default function Home() {
             {/* Living Room */}
             <div
               className={`accordion-panel ${activeCollection === 0 ? "active" : ""}`}
-              onMouseEnter={() => setActiveCollection(0)}
               onClick={() => {
-                setActiveCollection(0);
-                // Also open gallery if already active and clicked
-                if (activeCollection === 0) openGallery("living");
+                if (activeCollection === 0) {
+                  openGallery("living");
+                } else {
+                  setActiveCollection(0);
+                }
               }}
             >
               <Image
@@ -321,10 +322,12 @@ export default function Home() {
             {/* Bedroom */}
             <div
               className={`accordion-panel ${activeCollection === 1 ? "active" : ""}`}
-              onMouseEnter={() => setActiveCollection(1)}
               onClick={() => {
-                setActiveCollection(1);
-                if (activeCollection === 1) openGallery("bedroom");
+                if (activeCollection === 1) {
+                  openGallery("bedroom");
+                } else {
+                  setActiveCollection(1);
+                }
               }}
             >
               <Image
@@ -360,10 +363,12 @@ export default function Home() {
             {/* Dining */}
             <div
               className={`accordion-panel ${activeCollection === 2 ? "active" : ""}`}
-              onMouseEnter={() => setActiveCollection(2)}
               onClick={() => {
-                setActiveCollection(2);
-                if (activeCollection === 2) openGallery("dining");
+                if (activeCollection === 2) {
+                  openGallery("dining");
+                } else {
+                  setActiveCollection(2);
+                }
               }}
             >
               <Image
@@ -399,10 +404,12 @@ export default function Home() {
             {/* Custom/Office */}
             <div
               className={`accordion-panel ${activeCollection === 3 ? "active" : ""}`}
-              onMouseEnter={() => setActiveCollection(3)}
               onClick={() => {
-                setActiveCollection(3);
-                if (activeCollection === 3) openGallery("custom");
+                if (activeCollection === 3) {
+                  openGallery("custom");
+                } else {
+                  setActiveCollection(3);
+                }
               }}
             >
               <Image
