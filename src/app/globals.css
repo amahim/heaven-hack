@@ -370,12 +370,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-bg-video {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   z-index: 0;
   opacity: 0.85;
   pointer-events: none;
-  border: none;
 }
 
 .hero-content {
@@ -1315,20 +1317,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Responsive Videos */
 .desktop-video {
   display: block;
-  transform: translate(-50%, -50%) scale(1.35);
-  width: 177.77vh;
-  height: 100vh;
-  min-width: 100%;
-  min-height: 100%;
 }
-
-@media (max-height: 800px) {
-  .desktop-video {
-    width: 1422px;
-    height: 800px;
-  }
-}
-
 .mobile-video {
   display: none;
 }
@@ -1339,25 +1328,6 @@ h1, h2, h3, h4, h5, h6 {
   }
   .mobile-video {
     display: block;
-    transform: translate(-50%, -50%) scale(1.45);
-    width: 56.25vh;
-    height: 100vh;
-    min-width: 100%;
-    min-height: 100%;
-  }
-
-  @media (max-height: 800px) {
-    .mobile-video {
-      width: 450px;
-      height: 800px;
-    }
-  }
-
-  @media (min-aspect-ratio: 9/16) {
-    .mobile-video {
-      width: 100vw;
-      height: 177.77vw;
-    }
   }
 }
 

@@ -215,17 +215,21 @@ export default function Home() {
 
       {/* HERO SECTION */}
       <section className="hero-sec">
-        <iframe
+        <video
           className="hero-bg-video desktop-video"
-          src="https://www.youtube.com/embed/FOOWnn6eDZU?autoplay=1&mute=1&loop=1&playlist=FOOWnn6eDZU&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0"
-          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-          title="Heaven Furniture Mart Background"
+          src="/herovideoBig.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
         />
-        <iframe
+        <video
           className="hero-bg-video mobile-video"
-          src="https://www.youtube.com/embed/D1bDqLHvTmY?autoplay=1&mute=1&loop=1&playlist=D1bDqLHvTmY&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3&fs=0"
-          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
-          title="Heaven Furniture Mart Background Mobile"
+          src="/herovideosmall.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
         />
         <div className="hero-bg-overlay" />
         <div className="container" style={{ position: "relative", zIndex: 10 }}>
@@ -287,6 +291,7 @@ export default function Home() {
             {/* Living Room */}
             <div
               className={`accordion-panel ${activeCollection === 0 ? "active" : ""}`}
+              onMouseEnter={() => setActiveCollection(0)}
               onClick={() => {
                 if (activeCollection === 0) {
                   openGallery("living");
@@ -328,6 +333,7 @@ export default function Home() {
             {/* Bedroom */}
             <div
               className={`accordion-panel ${activeCollection === 1 ? "active" : ""}`}
+              onMouseEnter={() => setActiveCollection(1)}
               onClick={() => {
                 if (activeCollection === 1) {
                   openGallery("bedroom");
@@ -369,6 +375,7 @@ export default function Home() {
             {/* Dining */}
             <div
               className={`accordion-panel ${activeCollection === 2 ? "active" : ""}`}
+              onMouseEnter={() => setActiveCollection(2)}
               onClick={() => {
                 if (activeCollection === 2) {
                   openGallery("dining");
@@ -410,6 +417,7 @@ export default function Home() {
             {/* Custom/Office */}
             <div
               className={`accordion-panel ${activeCollection === 3 ? "active" : ""}`}
+              onMouseEnter={() => setActiveCollection(3)}
               onClick={() => {
                 if (activeCollection === 3) {
                   openGallery("custom");
