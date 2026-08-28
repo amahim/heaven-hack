@@ -1316,3 +1316,20 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Responsive Videos */
+.desktop-video {
+  display: block;
+}
+.mobile-video {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktop-video {
+    display: none;
+  }
+  .mobile-video {
+    display: block;
+  }
+}
+

@@ -216,10 +216,16 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="hero-sec">
         <iframe
-          className="hero-bg-video"
+          className="hero-bg-video desktop-video"
           src="https://www.youtube.com/embed/FOOWnn6eDZU?autoplay=1&mute=1&loop=1&playlist=FOOWnn6eDZU&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
           allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
           title="Heaven Furniture Mart Background"
+        />
+        <iframe
+          className="hero-bg-video mobile-video"
+          src="https://www.youtube.com/embed/D1bDqLHvTmY?autoplay=1&mute=1&loop=1&playlist=D1bDqLHvTmY&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+          allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+          title="Heaven Furniture Mart Background Mobile"
         />
         <div className="hero-bg-overlay" />
         <div className="container" style={{ position: "relative", zIndex: 10 }}>
