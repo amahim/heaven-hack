@@ -11,6 +11,7 @@ export default function Home() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [activeCollection, setActiveCollection] = useState(0);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -121,72 +122,116 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid-4">
+          <div className="collections-accordion">
             {/* Living Room */}
-            <div className="collection-card">
-              <div className="collection-card-img-wrapper">
-                <Image
-                  className="collection-card-img"
-                  src="/images/living_room.jpg"
-                  alt="Custom luxurious sofa set and coffee table crafted for living room interior"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </div>
-              <div className="collection-card-overlay">
-                <h3 className="collection-card-title">Living Room</h3>
-                <p className="collection-card-explore">Sofas · Coffee Tables · TV Consoles</p>
+            <div
+              className={`accordion-panel ${activeCollection === 0 ? "active" : ""}`}
+              onMouseEnter={() => setActiveCollection(0)}
+              onClick={() => setActiveCollection(0)}
+            >
+              <Image
+                className="accordion-panel-img"
+                src="/images/living_room.jpg"
+                alt="Custom luxurious sofa set and coffee table crafted for living room interior"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="accordion-panel-overlay" />
+              <div className="accordion-panel-content">
+                <h3 className="panel-title">Living Room</h3>
+                <p className="panel-tagline">Sofas · Coffee Tables · Consoles</p>
+                <div className="panel-details">
+                  <p className="panel-features">
+                    We design bespoke sectionals, modular sofas, and solid teak coffee tables built specifically for your layout and fabric selections.
+                  </p>
+                  <a href="#quote" className="panel-cta-btn">
+                    Customize Living <span>&rarr;</span>
+                  </a>
+                </div>
               </div>
             </div>
 
             {/* Bedroom */}
-            <div className="collection-card">
-              <div className="collection-card-img-wrapper">
-                <Image
-                  className="collection-card-img"
-                  src="/images/bedroom.jpg"
-                  alt="Custom solid wood bed, wardrobe, and modern nightstands in bedroom setup"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </div>
-              <div className="collection-card-overlay">
-                <h3 className="collection-card-title">Bedroom</h3>
-                <p className="collection-card-explore">Beds · Wardrobes · Dressers</p>
+            <div
+              className={`accordion-panel ${activeCollection === 1 ? "active" : ""}`}
+              onMouseEnter={() => setActiveCollection(1)}
+              onClick={() => setActiveCollection(1)}
+            >
+              <Image
+                className="accordion-panel-img"
+                src="/images/bedroom.jpg"
+                alt="Custom solid wood bed, wardrobe, and modern nightstands in bedroom setup"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="accordion-panel-overlay" />
+              <div className="accordion-panel-content">
+                <h3 className="panel-title">Bedroom</h3>
+                <p className="panel-tagline">Beds · Wardrobes · Dressers</p>
+                <div className="panel-details">
+                  <p className="panel-features">
+                    Create your sanctuary with custom-built solid wood frames, integrated floating nightstands, and sliding wardrobes tailored to your dimensions.
+                  </p>
+                  <a href="#quote" className="panel-cta-btn">
+                    Customize Bedroom <span>&rarr;</span>
+                  </a>
+                </div>
               </div>
             </div>
 
             {/* Dining */}
-            <div className="collection-card">
-              <div className="collection-card-img-wrapper">
-                <Image
-                  className="collection-card-img"
-                  src="/images/dining.jpg"
-                  alt="Bespoke solid teak wooden dining table and luxury dining chairs set"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </div>
-              <div className="collection-card-overlay">
-                <h3 className="collection-card-title">Dining Room</h3>
-                <p className="collection-card-explore">Dining Tables · Custom Chairs · Cabinets</p>
+            <div
+              className={`accordion-panel ${activeCollection === 2 ? "active" : ""}`}
+              onMouseEnter={() => setActiveCollection(2)}
+              onClick={() => setActiveCollection(2)}
+            >
+              <Image
+                className="accordion-panel-img"
+                src="/images/dining.jpg"
+                alt="Bespoke solid teak wooden dining table and luxury dining chairs set"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="accordion-panel-overlay" />
+              <div className="accordion-panel-content">
+                <h3 className="panel-title">Dining Room</h3>
+                <p className="panel-tagline">Dining Tables · Chairs · Cabinets</p>
+                <div className="panel-details">
+                  <p className="panel-features">
+                    Host gatherings around solid teak wooden tables carved with expert joints, combined with chairs upholstered in premium spill-resistant fabrics.
+                  </p>
+                  <a href="#quote" className="panel-cta-btn">
+                    Customize Dining <span>&rarr;</span>
+                  </a>
+                </div>
               </div>
             </div>
 
             {/* Custom/Office */}
-            <div className="collection-card">
-              <div className="collection-card-img-wrapper">
-                <Image
-                  className="collection-card-img"
-                  src="/images/craftsmanship.jpg"
-                  alt="Crafting a bespoke executive desk and custom study room workstation"
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-              </div>
-              <div className="collection-card-overlay">
-                <h3 className="collection-card-title">Office & Custom</h3>
-                <p className="collection-card-explore">Workstations · Executive Tables · Bookshelves</p>
+            <div
+              className={`accordion-panel ${activeCollection === 3 ? "active" : ""}`}
+              onMouseEnter={() => setActiveCollection(3)}
+              onClick={() => setActiveCollection(3)}
+            >
+              <Image
+                className="accordion-panel-img"
+                src="/images/craftsmanship.jpg"
+                alt="Crafting a bespoke executive desk and custom study room workstation"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div className="accordion-panel-overlay" />
+              <div className="accordion-panel-content">
+                <h3 className="panel-title">Office & Custom</h3>
+                <p className="panel-tagline">Workstations · Bookshelves</p>
+                <div className="panel-details">
+                  <p className="panel-features">
+                    Increase your productivity with library-grade wooden bookcases, heavy executive desks, and tailored storage credenzas.
+                  </p>
+                  <a href="#quote" className="panel-cta-btn">
+                    Customize Workspace <span>&rarr;</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
