@@ -3,6 +3,116 @@
 import React, { useState } from "react";
 import Image from "next/image";
 
+const LIVING_IMAGES = [
+  "photo_10_2026-08-28_21-00-42.jpg",
+  "photo_15_2026-08-28_21-00-43.jpg",
+  "photo_18_2026-08-28_21-00-43.jpg",
+  "photo_19_2026-08-28_21-00-43.jpg",
+  "photo_20_2026-08-28_21-00-43.jpg",
+  "photo_22_2026-08-28_21-00-43.jpg",
+  "photo_23_2026-08-28_21-00-43.jpg",
+  "photo_24_2026-08-28_21-00-43.jpg",
+  "photo_2_2026-08-28_21-00-42.jpg",
+  "photo_33_2026-08-28_21-00-43.jpg",
+  "photo_34_2026-08-28_21-00-43.jpg",
+  "photo_35_2026-08-28_21-00-43.jpg",
+  "photo_36_2026-08-28_21-00-43.jpg",
+  "photo_38_2026-08-28_21-00-43.jpg",
+  "photo_40_2026-08-28_21-00-43.jpg",
+  "photo_41_2026-08-28_21-00-43.jpg",
+  "photo_42_2026-08-28_21-00-43.jpg",
+  "photo_43_2026-08-28_21-00-43.jpg",
+  "photo_47_2026-08-28_21-00-43.jpg",
+  "photo_49_2026-08-28_21-00-43.jpg",
+  "photo_52_2026-08-28_21-00-43.jpg",
+  "photo_53_2026-08-28_21-00-43.jpg",
+  "photo_55_2026-08-28_21-00-43.jpg",
+  "photo_56_2026-08-28_21-00-43.jpg",
+  "photo_59_2026-08-28_21-00-44.jpg",
+  "photo_63_2026-08-28_21-00-44.jpg",
+  "photo_64_2026-08-28_21-00-44.jpg",
+  "photo_66_2026-08-28_21-00-44.jpg",
+  "photo_67_2026-08-28_21-00-44.jpg",
+  "photo_72_2026-08-28_21-00-44.jpg",
+  "photo_73_2026-08-28_21-00-44.jpg",
+  "photo_77_2026-08-28_21-00-44.jpg",
+  "photo_78_2026-08-28_21-00-44.jpg",
+  "photo_79_2026-08-28_21-00-44.jpg",
+  "photo_80_2026-08-28_21-00-44.jpg",
+  "photo_81_2026-08-28_21-00-44.jpg",
+  "photo_83_2026-08-28_21-00-44.jpg",
+  "photo_84_2026-08-28_21-00-44.jpg",
+  "photo_85_2026-08-28_21-00-44.jpg",
+  "photo_86_2026-08-28_21-00-44.jpg",
+  "photo_87_2026-08-28_21-00-44.jpg",
+  "photo_88_2026-08-28_21-00-44.jpg",
+  "photo_89_2026-08-28_21-00-44.jpg",
+  "photo_9_2026-08-28_21-00-42.jpg"
+];
+
+const BEDROOM_IMAGES = [
+  "photo_1_2026-08-28_21-00-42.jpg",
+  "photo_21_2026-08-28_21-00-43.jpg",
+  "photo_29_2026-08-28_21-00-43.jpg",
+  "photo_30_2026-08-28_21-00-43.jpg",
+  "photo_31_2026-08-28_21-00-43.jpg",
+  "photo_32_2026-08-28_21-00-43.jpg",
+  "photo_37_2026-08-28_21-00-43.jpg",
+  "photo_46_2026-08-28_21-00-43.jpg",
+  "photo_48_2026-08-28_21-00-43.jpg",
+  "photo_4_2026-08-28_21-00-42.jpg",
+  "photo_57_2026-08-28_21-00-43.jpg",
+  "photo_58_2026-08-28_21-00-44.jpg",
+  "photo_60_2026-08-28_21-00-44.jpg",
+  "photo_61_2026-08-28_21-00-44.jpg",
+  "photo_62_2026-08-28_21-00-44.jpg",
+  "photo_68_2026-08-28_21-00-44.jpg",
+  "photo_69_2026-08-28_21-00-44.jpg",
+  "photo_74_2026-08-28_21-00-44.jpg",
+  "photo_76_2026-08-28_21-00-44.jpg",
+  "photo_80_2026-08-28_21-00-44.jpg",
+  "photo_83_2026-08-28_21-00-44.jpg"
+];
+
+const DINING_IMAGES = [
+  "photo_12_2026-08-28_21-00-42.jpg",
+  "photo_13_2026-08-28_21-00-42.jpg",
+  "photo_14_2026-08-28_21-00-42.jpg",
+  "photo_16_2026-08-28_21-00-43.jpg",
+  "photo_19_2026-08-28_21-00-43.jpg",
+  "photo_25_2026-08-28_21-00-43.jpg",
+  "photo_27_2026-08-28_21-00-43.jpg",
+  "photo_28_2026-08-28_21-00-43.jpg",
+  "photo_39_2026-08-28_21-00-43.jpg",
+  "photo_3_2026-08-28_21-00-42.jpg",
+  "photo_44_2026-08-28_21-00-43.jpg",
+  "photo_50_2026-08-28_21-00-43.jpg",
+  "photo_51_2026-08-28_21-00-43.jpg",
+  "photo_6_2026-08-28_21-00-42.jpg",
+  "photo_71_2026-08-28_21-00-44 - Copy.jpg",
+  "photo_72_2026-08-28_21-00-44 - Copy.jpg",
+  "photo_75_2026-08-28_21-00-44 - Copy.jpg",
+  "photo_78_2026-08-28_21-00-44 - Copy.jpg",
+  "photo_7_2026-08-28_21-00-42.jpg"
+];
+
+const CUSTOM_IMAGES = [
+  "photo_10_2026-08-28_21-00-42.jpg",
+  "photo_12_2026-08-28_21-00-42.jpg",
+  "photo_14_2026-08-28_21-00-42.jpg",
+  "photo_15_2026-08-28_21-00-43.jpg",
+  "photo_16_2026-08-28_21-00-43.jpg",
+  "photo_1_2026-08-28_21-00-42.jpg",
+  "photo_2_2026-08-28_21-00-42.jpg",
+  "photo_3_2026-08-28_21-00-42.jpg",
+  "photo_4_2026-08-28_21-00-42.jpg",
+  "photo_6_2026-08-28_21-00-42.jpg",
+  "photo_71_2026-08-28_21-00-44 - Copy.jpg",
+  "photo_7_2026-08-28_21-00-42.jpg",
+  "photo_8_2026-08-28_21-00-42.jpg",
+  "photo_9_2026-08-28_21-00-42.jpg"
+];
+
 export default function Home() {
   const [formState, setFormState] = useState({
     name: "",
@@ -12,6 +122,54 @@ export default function Home() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [activeCollection, setActiveCollection] = useState(0);
+
+  // Gallery and Lightbox Modal States
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<"living" | "bedroom" | "dining" | "custom" | null>(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [zoomActive, setZoomActive] = useState(false);
+
+  const openGallery = (category: "living" | "bedroom" | "dining" | "custom") => {
+    setSelectedCategory(category);
+    setGalleryOpen(true);
+    // Disable main body scroll when gallery is open
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeGallery = () => {
+    setGalleryOpen(false);
+    setSelectedCategory(null);
+    // Restore main body scroll
+    document.body.style.overflow = "";
+  };
+
+  const openLightbox = (imgSrc: string) => {
+    setSelectedImage(imgSrc);
+    setZoomActive(false);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+    setSelectedImage(null);
+    setZoomActive(false);
+  };
+
+  const toggleZoom = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Avoid closing lightbox when clicking on the image to zoom
+    setZoomActive(!zoomActive);
+  };
+
+  const getCategoryImages = () => {
+    switch (selectedCategory) {
+      case "living": return { title: "Living Room", folder: "Living", list: LIVING_IMAGES };
+      case "bedroom": return { title: "Bedroom", folder: "Bedroom", list: BEDROOM_IMAGES };
+      case "dining": return { title: "Dining Room", folder: "Dining", list: DINING_IMAGES };
+      case "custom": return { title: "Bespoke & Workspace", folder: "Custom", list: CUSTOM_IMAGES };
+      default: return { title: "", folder: "", list: [] };
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -127,12 +285,16 @@ export default function Home() {
             <div
               className={`accordion-panel ${activeCollection === 0 ? "active" : ""}`}
               onMouseEnter={() => setActiveCollection(0)}
-              onClick={() => setActiveCollection(0)}
+              onClick={() => {
+                setActiveCollection(0);
+                // Also open gallery if already active and clicked
+                if (activeCollection === 0) openGallery("living");
+              }}
             >
               <Image
                 className="accordion-panel-img"
-                src="/images/living_room.jpg"
-                alt="Custom luxurious sofa set and coffee table crafted for living room interior"
+                src="/officialImages/Living/photo_10_2026-08-28_21-00-42.jpg"
+                alt="Heaven Furniture Mart custom luxurious sofa set and coffee table"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
@@ -144,9 +306,16 @@ export default function Home() {
                   <p className="panel-features">
                     We design bespoke sectionals, modular sofas, and solid teak coffee tables built specifically for your layout and fabric selections.
                   </p>
-                  <a href="#quote" className="panel-cta-btn">
-                    Customize Living <span>&rarr;</span>
-                  </a>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openGallery("living");
+                    }}
+                    className="panel-cta-btn"
+                    style={{ background: "none", border: "none", cursor: "pointer" }}
+                  >
+                    Explore Gallery ({LIVING_IMAGES.length} Photos) <span>&rarr;</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -155,12 +324,15 @@ export default function Home() {
             <div
               className={`accordion-panel ${activeCollection === 1 ? "active" : ""}`}
               onMouseEnter={() => setActiveCollection(1)}
-              onClick={() => setActiveCollection(1)}
+              onClick={() => {
+                setActiveCollection(1);
+                if (activeCollection === 1) openGallery("bedroom");
+              }}
             >
               <Image
                 className="accordion-panel-img"
-                src="/images/bedroom.jpg"
-                alt="Custom solid wood bed, wardrobe, and modern nightstands in bedroom setup"
+                src="/officialImages/Bedroom/photo_1_2026-08-28_21-00-42.jpg"
+                alt="Heaven Furniture Mart custom solid wood bed, wardrobe, and modern nightstands"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
@@ -172,9 +344,16 @@ export default function Home() {
                   <p className="panel-features">
                     Create your sanctuary with custom-built solid wood frames, integrated floating nightstands, and sliding wardrobes tailored to your dimensions.
                   </p>
-                  <a href="#quote" className="panel-cta-btn">
-                    Customize Bedroom <span>&rarr;</span>
-                  </a>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openGallery("bedroom");
+                    }}
+                    className="panel-cta-btn"
+                    style={{ background: "none", border: "none", cursor: "pointer" }}
+                  >
+                    Explore Gallery ({BEDROOM_IMAGES.length} Photos) <span>&rarr;</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -183,12 +362,15 @@ export default function Home() {
             <div
               className={`accordion-panel ${activeCollection === 2 ? "active" : ""}`}
               onMouseEnter={() => setActiveCollection(2)}
-              onClick={() => setActiveCollection(2)}
+              onClick={() => {
+                setActiveCollection(2);
+                if (activeCollection === 2) openGallery("dining");
+              }}
             >
               <Image
                 className="accordion-panel-img"
-                src="/images/dining.jpg"
-                alt="Bespoke solid teak wooden dining table and luxury dining chairs set"
+                src="/officialImages/Dining/photo_12_2026-08-28_21-00-42.jpg"
+                alt="Heaven Furniture Mart bespoke solid teak wooden dining table and luxury dining chairs set"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
@@ -200,9 +382,16 @@ export default function Home() {
                   <p className="panel-features">
                     Host gatherings around solid teak wooden tables carved with expert joints, combined with chairs upholstered in premium spill-resistant fabrics.
                   </p>
-                  <a href="#quote" className="panel-cta-btn">
-                    Customize Dining <span>&rarr;</span>
-                  </a>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openGallery("dining");
+                    }}
+                    className="panel-cta-btn"
+                    style={{ background: "none", border: "none", cursor: "pointer" }}
+                  >
+                    Explore Gallery ({DINING_IMAGES.length} Photos) <span>&rarr;</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -211,12 +400,15 @@ export default function Home() {
             <div
               className={`accordion-panel ${activeCollection === 3 ? "active" : ""}`}
               onMouseEnter={() => setActiveCollection(3)}
-              onClick={() => setActiveCollection(3)}
+              onClick={() => {
+                setActiveCollection(3);
+                if (activeCollection === 3) openGallery("custom");
+              }}
             >
               <Image
                 className="accordion-panel-img"
-                src="/images/craftsmanship.jpg"
-                alt="Crafting a bespoke executive desk and custom study room workstation"
+                src="/officialImages/Custom/photo_1_2026-08-28_21-00-42.jpg"
+                alt="Heaven Furniture Mart custom executive desk and custom study room workstation"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
@@ -228,9 +420,16 @@ export default function Home() {
                   <p className="panel-features">
                     Increase your productivity with library-grade wooden bookcases, heavy executive desks, and tailored storage credenzas.
                   </p>
-                  <a href="#quote" className="panel-cta-btn">
-                    Customize Workspace <span>&rarr;</span>
-                  </a>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openGallery("custom");
+                    }}
+                    className="panel-cta-btn"
+                    style={{ background: "none", border: "none", cursor: "pointer" }}
+                  >
+                    Explore Gallery ({CUSTOM_IMAGES.length} Photos) <span>&rarr;</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -653,6 +852,71 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      {/* GALLERY MODAL */}
+      {galleryOpen && selectedCategory && (
+        <div className="gallery-modal-overlay">
+          <div className="gallery-modal-header">
+            <h2 className="gallery-modal-title">
+              {getCategoryImages().title} <span style={{ color: "var(--color-gold)", fontSize: "1.1rem", fontFamily: "var(--font-sans)", fontWeight: 500, marginLeft: "1rem" }}>Heaven Gallery</span>
+            </h2>
+            <button className="gallery-close-btn" onClick={closeGallery} aria-label="Close Gallery">
+              ✕
+            </button>
+          </div>
+          <div className="gallery-grid-container">
+            <div className="gallery-grid">
+              {getCategoryImages().list.map((filename, index) => {
+                const imgSrc = `/officialImages/${getCategoryImages().folder}/${filename}`;
+                return (
+                  <div
+                    key={index}
+                    className="gallery-item"
+                    onClick={() => openLightbox(imgSrc)}
+                  >
+                    <Image
+                      className="gallery-item-img"
+                      src={imgSrc}
+                      alt={`Heaven Furniture Mart bespoke piece ${index + 1}`}
+                      width={400}
+                      height={400}
+                      sizes="(max-width: 480px) 100vw, (max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                      style={{ width: "100%", height: "auto" }}
+                      loading="lazy"
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* LIGHTBOX OVERLAY */}
+      {lightboxOpen && selectedImage && (
+        <div className="lightbox-overlay" onClick={closeLightbox}>
+          <button className="lightbox-close-btn" onClick={closeLightbox} aria-label="Close Photo">
+            ✕
+          </button>
+          <div className="lightbox-content-wrapper" onClick={(e) => e.stopPropagation()}>
+            <Image
+              className={`lightbox-image ${zoomActive ? "zoomed" : ""}`}
+              src={selectedImage}
+              alt="Bespoke furniture piece close up display"
+              width={1200}
+              height={1200}
+              style={{
+                maxWidth: "90vw",
+                maxHeight: "90vh",
+                width: "auto",
+                height: "auto",
+                objectFit: "contain",
+              }}
+              onClick={toggleZoom}
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }
