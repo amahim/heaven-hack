@@ -113,6 +113,89 @@ const CUSTOM_IMAGES = [
   "photo_9_2026-08-28_21-00-42.jpg"
 ];
 
+const PILLARS = [
+  {
+    number: "01",
+    tag: "Complimentary",
+    title: "Free Consultations",
+    desc: "Partner with our interior designers at no charge to draft custom layout concepts, 3D proportions, and wood finish directions.",
+    benefit: "1-on-1 Personalized Session",
+    category: "artistry",
+    icon: (
+      <svg className="why-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+      </svg>
+    ),
+  },
+  {
+    number: "02",
+    tag: "Custom Tailored",
+    title: "100% Bespoke Craft",
+    desc: "No templates or mass manufacturing. Every cut, joint, and contour is hand-shaped to suit your home's exact layout.",
+    benefit: "Zero Catalog Clones",
+    category: "artistry",
+    icon: (
+      <svg className="why-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122l.188-.188a3 3 0 114.154 0l.188.188a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 010-1.414z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 11.5a3.5 3.5 0 11-7 0 3.5 3.5 0 017 0z" />
+      </svg>
+    ),
+  },
+  {
+    number: "03",
+    tag: "Heirloom Quality",
+    title: "Premium Materials",
+    desc: "We source only seasoned Chittagong teak, luxury hardwoods, high-density comfort foams, and premium stain-resistant fabrics.",
+    benefit: "Seasoned Teak Wood",
+    category: "artistry",
+    icon: (
+      <svg className="why-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+      </svg>
+    ),
+  },
+  {
+    number: "04",
+    tag: "Tactile Experience",
+    title: "Agrabad Showroom",
+    desc: "Visit our physical studio in Chattogram to experience the tactile finish, test seating comfort, and inspect joint details firsthand.",
+    benefit: "Open 7 Days a Week",
+    category: "service",
+    icon: (
+      <svg className="why-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+      </svg>
+    ),
+  },
+  {
+    number: "05",
+    tag: "Seamless Delivery",
+    title: "Full Delivery & Setup",
+    desc: "Stress-free white-glove delivery and meticulous on-site assembly handled by our specialized in-house technician crew.",
+    benefit: "White-Glove Placement",
+    category: "service",
+    icon: (
+      <svg className="why-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10M13 16h4M17 16h2a2 2 0 002-2v-5l-3-3h-3v10m-3-10V4a1 1 0 00-1-1H4z" />
+      </svg>
+    ),
+  },
+  {
+    number: "06",
+    tag: "Transparent Terms",
+    title: "Flexible Payments",
+    desc: "Client-friendly staged milestone payments scheduled from booking through final delivery and satisfaction check.",
+    benefit: "Milestone Transparency",
+    category: "service",
+    icon: (
+      <svg className="why-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+      </svg>
+    ),
+  },
+];
+
 export default function Home() {
   const [formState, setFormState] = useState({
     name: "",
@@ -122,6 +205,46 @@ export default function Home() {
   });
   const [submitted, setSubmitted] = useState(false);
   const [activeCollection, setActiveCollection] = useState(0);
+  const [fabOpen, setFabOpen] = useState(false);
+
+  // Why Choose Heaven Section State
+  const [whyFilter, setWhyFilter] = useState<"all" | "artistry" | "service">("all");
+  const [activeCardIndex, setActiveCardIndex] = useState(0);
+  const whyCardsRef = React.useRef<HTMLDivElement>(null);
+  const whyTabsRef = React.useRef<HTMLDivElement>(null);
+
+  const handleTabClick = (category: "all" | "artistry" | "service", e: React.MouseEvent<HTMLButtonElement>) => {
+    setWhyFilter(category);
+    setActiveCardIndex(0);
+    if (whyCardsRef.current) whyCardsRef.current.scrollTo({ left: 0, behavior: "smooth" });
+    e.currentTarget.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  };
+
+  const scrollWhyCards = (direction: "left" | "right") => {
+    if (whyCardsRef.current) {
+      const container = whyCardsRef.current;
+      const card = container.querySelector(".why-card") as HTMLElement;
+      const scrollAmount = card ? card.offsetWidth + 16 : container.offsetWidth * 0.82;
+      container.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollToWhyCard = (index: number) => {
+    if (whyCardsRef.current) {
+      const container = whyCardsRef.current;
+      const cards = container.querySelectorAll(".why-card");
+      if (cards[index]) {
+        (cards[index] as HTMLElement).scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
+    }
+  };
 
   // Gallery and Lightbox Modal States
   const [galleryOpen, setGalleryOpen] = useState(false);
@@ -166,7 +289,7 @@ export default function Home() {
       case "living": return { title: "Living Room", folder: "Living", list: LIVING_IMAGES };
       case "bedroom": return { title: "Bedroom", folder: "Bedroom", list: BEDROOM_IMAGES };
       case "dining": return { title: "Dining Room", folder: "Dining", list: DINING_IMAGES };
-      case "custom": return { title: "Bespoke & Workspace", folder: "Custom", list: CUSTOM_IMAGES };
+      case "custom": return { title: "Office & Custom", folder: "Custom", list: CUSTOM_IMAGES };
       default: return { title: "", folder: "", list: [] };
     }
   };
@@ -198,7 +321,7 @@ export default function Home() {
       <header className="site-header">
         <div className="container">
           <a href="#" className="logo-link">
-            <span className="logo-main">HEAVEN</span>
+            <span className="logo-main">HE<span style={{ color: "var(--color-gold)", marginRight: "-0.05em" }}>A</span>VEN</span>
             <span className="logo-sub">Furniture Mart</span>
           </a>
           <nav className="header-nav">
@@ -444,7 +567,7 @@ export default function Home() {
             >
               <Image
                 className="accordion-panel-img"
-                src="/officialImages/Custom/photo_1_2026-08-28_21-00-42.jpg"
+                src="/officialImages/Custom/photo_9_2026-08-28_21-00-42.jpg"
                 alt="Heaven Furniture Mart custom executive desk and custom study room workstation"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -478,133 +601,173 @@ export default function Home() {
       {/* BESPOKE HIGHLIGHT */}
       <section className="section bg-ivory-solid" id="bespoke">
         <div className="container">
-          <div className="grid-2">
+          <div style={{ textAlign: "center", marginBottom: "3.5rem" }}>
+            <span className="section-tagline">Our Signature Edge</span>
+            <h2 className="section-title" style={{ color: "var(--color-teal)", marginBottom: "1rem" }}>
+              From Concept Sketch to Final Installation
+            </h2>
+            <p className="section-desc" style={{ color: "var(--color-text-muted-dark)", margin: "0 auto" }}>
+              We believe your furniture should fit your home, not the other way around. Our custom bespoke service allows you to customize the wood species, dimensions, fabric color, and design details of any piece.
+            </p>
+          </div>
+
+          <div className="grid-2" style={{ alignItems: "center" }}>
             <div className="bespoke-media">
-              <Image
-                src="/images/craftsmanship.jpg"
-                alt="A close up of skilled craftsman hand carving a custom solid wood furniture detail in the workshop"
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
+              <video
+                className="bespoke-video"
+                src="https://res.cloudinary.com/dpd5gh6hq/video/upload/v1788199842/IMG_1952.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="auto"
               />
             </div>
             <div>
-              <span className="section-tagline">Our Signature Edge</span>
-              <h2 className="section-title-medium" style={{ color: "var(--color-teal)" }}>
-                From Concept Sketch to Final Installation
-              </h2>
-              <p className="section-desc">
-                We believe your furniture should fit your home, not the other way around. Our custom bespoke service allows you to customize the wood species, dimensions, fabric color, and design details of any piece.
-              </p>
-
               <div className="bespoke-steps">
-                <div className="bespoke-step">
-                  <span className="bespoke-step-num">01</span>
+                <div className="bespoke-step-card">
+                  <div className="bespoke-step-badge">01</div>
                   <div className="bespoke-step-content">
-                    <h4 style={{ color: "var(--color-teal)" }}>Free Design Consultation</h4>
-                    <p>Discuss your floor plan, style preferences, and utility requirements with our expert designers.</p>
+                    <div className="bespoke-step-header">
+                      <h4>Free Design Consultation</h4>
+                      <span className="bespoke-step-phase">Phase 01</span>
+                    </div>
+                    <p>Discuss your floor plan, style preferences, and utility requirements directly with our lead designers.</p>
                   </div>
                 </div>
 
-                <div className="bespoke-step">
-                  <span className="bespoke-step-num">02</span>
+                <div className="bespoke-step-card">
+                  <div className="bespoke-step-badge">02</div>
                   <div className="bespoke-step-content">
-                    <h4 style={{ color: "var(--color-teal)" }}>Custom Proportions & Wood Selection</h4>
-                    <p>Select from premium, seasoned teak and luxury hardwoods, and tailor the dimensions to fit your space perfectly.</p>
+                    <div className="bespoke-step-header">
+                      <h4>Custom Proportions & Wood Selection</h4>
+                      <span className="bespoke-step-phase">Phase 02</span>
+                    </div>
+                    <p>Select from seasoned Chittagong teak and luxury hardwoods, tailored to your space's exact dimensions.</p>
                   </div>
                 </div>
 
-                <div className="bespoke-step">
-                  <span className="bespoke-step-num">03</span>
+                <div className="bespoke-step-card">
+                  <div className="bespoke-step-badge">03</div>
                   <div className="bespoke-step-content">
-                    <h4 style={{ color: "var(--color-teal)" }}>Artisanal Hand-Crafting</h4>
-                    <p>Our skilled in-house artisans hand-carve and build each joint, ensuring outstanding durability and a stunning finish.</p>
+                    <div className="bespoke-step-header">
+                      <h4>Artisanal Hand-Crafting</h4>
+                      <span className="bespoke-step-phase">Phase 03</span>
+                    </div>
+                    <p>Our skilled in-house artisans hand-carve and build each joint, ensuring generational durability and luxury finish.</p>
                   </div>
                 </div>
+              </div>
+
+              <div style={{ marginTop: "2rem" }}>
+                <a href="#quote" className="btn btn-secondary" style={{ padding: "0.85rem 1.8rem", fontSize: "0.85rem" }}>
+                  Start Your Custom Creation <span>&rarr;</span>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* WHY CHOOSE HEAVEN (TRUST BULLETS) */}
+      {/* WHY CHOOSE HEAVEN (MODERN LUXURY PILLARS & SLIDER) */}
       <section className="section bg-dark-solid" id="why-choose">
         <div className="container">
-          <div style={{ textAlign: "center", marginBottom: "5rem" }}>
+          <div style={{ textAlign: "center", marginBottom: "3rem" }}>
             <span className="section-tagline">Why Choose Heaven</span>
             <h2 className="section-title">The Pillars of Our Standard</h2>
             <p className="section-desc" style={{ margin: "0 auto" }}>
-              Our commitment to excellence dictates every phase of our interaction, offering peace of mind along with premium style.
+              Our commitment to excellence dictates every phase of our interaction, offering peace of mind along with heirloom luxury.
             </p>
           </div>
 
-          <div className="grid-3">
-            {/* Consultation */}
-            <div className="why-card">
-              <svg className="why-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
-              </svg>
-              <h3 className="why-card-title">Free Consultations</h3>
-              <p className="why-card-desc">
-                Partner with our interior designers at no charge to draft layout concepts and choose structural directions.
-              </p>
+          {/* Browser-Style Category Tab Strip */}
+          <div className="why-tabs-wrapper">
+            <div className="why-tabs-container" ref={whyTabsRef}>
+              <button
+                className={`why-tab-btn ${whyFilter === "all" ? "active" : ""}`}
+                onClick={(e) => handleTabClick("all", e)}
+              >
+                All 6 Pillars
+              </button>
+              <button
+                className={`why-tab-btn ${whyFilter === "artistry" ? "active" : ""}`}
+                onClick={(e) => handleTabClick("artistry", e)}
+              >
+                Artistry & Materials
+              </button>
+              <button
+                className={`why-tab-btn ${whyFilter === "service" ? "active" : ""}`}
+                onClick={(e) => handleTabClick("service", e)}
+              >
+                Showroom & Service
+              </button>
             </div>
+          </div>
 
-            {/* Fully Bespoke */}
-            <div className="why-card">
-              <svg className="why-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9.53 16.122l.188-.188a3 3 0 114.154 0l.188.188a1 1 0 010 1.414l-1.414 1.414a1 1 0 01-1.414 0l-1.414-1.414a1 1 0 010-1.414z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 11.5a3.5 3.5 0 11-7 0 3.5 3.5 0 017 0z" />
-              </svg>
-              <h3 className="why-card-title">100% Bespoke Craft</h3>
-              <p className="why-card-desc">
-                No templates or mass manufacturing. Every cut and detail is designed to suit your home’s architecture.
-              </p>
-            </div>
+          {/* Luxury Pillar Cards Grid / Slider */}
+          <div
+            className="why-cards-grid"
+            ref={whyCardsRef}
+            onScroll={(e) => {
+              const target = e.currentTarget;
+              const card = target.querySelector(".why-card") as HTMLElement;
+              if (card) {
+                const cardWidth = card.offsetWidth + 16;
+                const newIndex = Math.round(target.scrollLeft / cardWidth);
+                setActiveCardIndex(newIndex);
+              }
+            }}
+          >
+            {PILLARS.filter(
+              (p) => whyFilter === "all" || p.category === whyFilter
+            ).map((pillar) => (
+              <div key={pillar.number} className="why-card">
+                <span className="why-card-number">{pillar.number}</span>
+                <div>
+                  <div className="why-card-top">
+                    <div className="why-icon-box">{pillar.icon}</div>
+                    <span className="why-card-tag">{pillar.tag}</span>
+                  </div>
+                  <h3 className="why-card-title">{pillar.title}</h3>
+                  <p className="why-card-desc">{pillar.desc}</p>
+                </div>
+                <div className="why-card-benefit">
+                  <span className="why-card-benefit-dot" />
+                  <span>{pillar.benefit}</span>
+                </div>
+              </div>
+            ))}
+          </div>
 
-            {/* Premium Materials */}
-            <div className="why-card">
-              <svg className="why-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-              </svg>
-              <h3 className="why-card-title">Premium Materials</h3>
-              <p className="why-card-desc">
-                We source only premium seasoned wood, durable fabrics, and high-performance hardware for longevity.
-              </p>
+          {/* Mobile Navigation Controls */}
+          <div className="why-mobile-controls">
+            <button
+              className="why-nav-btn"
+              onClick={() => scrollWhyCards("left")}
+              aria-label="Previous card"
+            >
+              ←
+            </button>
+            <div className="why-dots-indicator">
+              {PILLARS.filter(
+                (p) => whyFilter === "all" || p.category === whyFilter
+              ).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => scrollToWhyCard(i)}
+                  className={`why-dot ${activeCardIndex === i ? "active" : ""}`}
+                  aria-label={`Go to card ${i + 1}`}
+                  style={{ border: "none", cursor: "pointer", padding: 0 }}
+                />
+              ))}
             </div>
-
-            {/* Showroom */}
-            <div className="why-card">
-              <svg className="why-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-              </svg>
-              <h3 className="why-card-title">Agrabad Showroom</h3>
-              <p className="why-card-desc">
-                Visit our physical studio in Chattogram to experience the tactile finish, materials, and scale firsthand.
-              </p>
-            </div>
-
-            {/* Delivery */}
-            <div className="why-card">
-              <svg className="why-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10M13 16h4M17 16h2a2 2 0 002-2v-5l-3-3h-3v10m-3-10V4a1 1 0 00-1-1H4z" />
-              </svg>
-              <h3 className="why-card-title">Full Delivery & Setup</h3>
-              <p className="why-card-desc">
-                Stress-free delivery and white-glove assembly are fully handled by our specialized logistics team.
-              </p>
-            </div>
-
-            {/* Easy Payments */}
-            <div className="why-card">
-              <svg className="why-card-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-              </svg>
-              <h3 className="why-card-title">Flexible Payments</h3>
-              <p className="why-card-desc">
-                Comfortable partial payment schedules and transparent pricing structure built with our clients in mind.
-              </p>
-            </div>
+            <button
+              className="why-nav-btn"
+              onClick={() => scrollWhyCards("right")}
+              aria-label="Next card"
+            >
+              →
+            </button>
           </div>
         </div>
       </section>
@@ -657,18 +820,83 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Showroom Photo Highlight */}
-          <div className="showroom-showcase">
-            <Image
-              src="/images/showroom.jpg"
-              alt="Heaven Furniture Mart elegant showroom exterior and custom gallery setup located in Agrabad, Chattogram"
-              fill
-              sizes="100vw"
-            />
-            <div className="showroom-showcase-overlay">
-              <div className="showroom-info">
-                <h3>Our Agrabad Showroom</h3>
-                <p>Agrabad Access Road, Chattogram. Open daily 10:00 AM — 8:30 PM. Call: +880 1960-481983</p>
+          {/* Showroom Hub & Location Map */}
+          <div className="showroom-hub-sec" style={{ marginTop: "6rem" }}>
+            <div style={{ textAlign: "center", marginBottom: "3rem" }}>
+              <span className="section-tagline" style={{ color: "var(--color-ivory)" }}>Visit Us</span>
+              <h2 className="section-title" style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", marginBottom: "0.75rem" }}>
+                Our Agrabad Showroom
+              </h2>
+              <p className="section-desc" style={{ color: "var(--color-text-muted)", margin: "0 auto" }}>
+                Experience the tactile warmth of seasoned teak, test seating comfort, and inspect hand-carved joinery in person.
+              </p>
+            </div>
+
+            <div className="showroom-hub-grid">
+              {/* Showroom Info Details Card */}
+              <div className="showroom-info-card">
+                <div className="showroom-info-item">
+                  <div className="showroom-info-icon">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3.5 3.5 0 016 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4>Showroom Location</h4>
+                    <p>Agrabad Access Road, Chattogram, Bangladesh</p>
+                  </div>
+                </div>
+
+                <div className="showroom-info-item">
+                  <div className="showroom-info-icon">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4>Visiting Hours</h4>
+                    <p>Open 7 Days a Week<br />10:00 AM — 8:30 PM Daily</p>
+                  </div>
+                </div>
+
+                <div className="showroom-info-item">
+                  <div className="showroom-info-icon">
+                    <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h4>Direct Inquiries</h4>
+                    <p>+880 1960-481983<br />heavenfurnituremart@gmail.com</p>
+                  </div>
+                </div>
+
+                <div className="showroom-actions">
+                  <a
+                    href="https://maps.app.goo.gl/1c8d5c27"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                    style={{ width: "100%", textAlign: "center", fontSize: "0.82rem", padding: "0.9rem 1.5rem" }}
+                  >
+                    Open in Google Maps ↗
+                  </a>
+                </div>
+              </div>
+
+              {/* Showroom Interactive Map */}
+              <div className="showroom-map-container">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2931.3641070328913!2d91.7905104!3d22.3296222!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30acd999401bf62b%3A0xcd9639571c8d5c27!2sHeaven%20Furniture%20Mart!5e1!3m2!1sen!2sbd!4v1788197648646!5m2!1sen!2sbd"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  title="Heaven Furniture Mart Location Map"
+                />
               </div>
             </div>
           </div>
@@ -800,7 +1028,7 @@ export default function Home() {
           <div className="footer-grid">
             <div className="footer-brand">
               <a href="#" className="logo-link">
-                <span className="logo-main" style={{ color: "var(--color-ivory)" }}>HEAVEN</span>
+                <span className="logo-main" style={{ color: "var(--color-ivory)" }}>HE<span style={{ color: "var(--color-gold)", marginRight: "-0.05em" }}>A</span>VEN</span>
                 <span className="logo-sub">Furniture Mart</span>
               </a>
               <p>
@@ -895,9 +1123,10 @@ export default function Home() {
       {galleryOpen && selectedCategory && (
         <div className="gallery-modal-overlay">
           <div className="gallery-modal-header">
-            <h2 className="gallery-modal-title">
-              {getCategoryImages().title} <span style={{ color: "var(--color-gold)", fontSize: "1.1rem", fontFamily: "var(--font-sans)", fontWeight: 500, marginLeft: "1rem" }}>Heaven Gallery</span>
-            </h2>
+            <div className="gallery-modal-title-group">
+              <h2 className="gallery-modal-title">{getCategoryImages().title}</h2>
+              <span className="gallery-modal-subtitle">Heaven Gallery</span>
+            </div>
             <button className="gallery-close-btn" onClick={closeGallery} aria-label="Close Gallery">
               ✕
             </button>
@@ -955,6 +1184,58 @@ export default function Home() {
           </div>
         </div>
       )}
+
+      {/* FLOATING WHATSAPP SPEED DIAL / FAB */}
+      <div
+        className="fab-container"
+        onMouseEnter={() => setFabOpen(true)}
+        onMouseLeave={() => setFabOpen(false)}
+      >
+        {/* Speed Dial Menu Items */}
+        <div className={`fab-menu ${fabOpen ? "active" : ""}`}>
+          <a
+            href="tel:+8801960481983"
+            className="fab-item"
+            aria-label="Direct Phone Call to Showroom"
+          >
+            <span className="fab-label">Call Showroom</span>
+            <div className="fab-item-btn fab-call">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+            </div>
+          </a>
+
+          <a
+            href="#quote"
+            className="fab-item"
+            aria-label="Request Design Consultation"
+            onClick={() => setFabOpen(false)}
+          >
+            <span className="fab-label">Request Quote</span>
+            <div className="fab-item-btn fab-quote">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+            </div>
+          </a>
+        </div>
+
+        {/* Main WhatsApp FAB Button */}
+        <a
+          href="https://wa.me/8801960481983?text=Hello%20Heaven%20Furniture%20Mart%2C%20I%20would%20like%20to%20inquire%20about%20bespoke%20furniture."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fab-main-btn"
+          aria-label="Chat on WhatsApp"
+        >
+          <span className="fab-pulse-ring" />
+          <svg className="fab-whatsapp-icon" viewBox="0 0 24 24">
+            <path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984a9.96 9.96 0 001.333 4.982L2 22l5.202-1.364a9.92 9.92 0 004.81 1.239h.005c5.502 0 9.99-4.479 9.99-9.986.002-2.67-1.037-5.18-2.927-7.072A9.924 9.924 0 0012.012 2zm5.727 14.008c-.313.88-1.56 1.6-2.147 1.7-.5.087-1.157.17-3.397-.758-2.863-1.184-4.693-4.085-4.836-4.275-.143-.19-1.163-1.545-1.163-2.946 0-1.4.733-2.09.994-2.373.26-.282.574-.35.766-.35h.548c.174 0 .385-.065.597.45.22.533.75 1.834.815 1.968.065.134.11.29.02.47-.09.18-.135.29-.27.45-.134.16-.282.355-.403.48-.135.135-.276.282-.12.55.157.27.7 1.15 1.5 1.865.733.65 1.353.85 1.637.986.284.135.45.114.619-.08.168-.194.733-.854.927-1.144.195-.29.39-.24.66-.14.27.1.1.84.34.84.28 0 .733-.346.883-.497s.483.473.548.552z" />
+          </svg>
+          <span className="fab-tooltip">Chat with us on WhatsApp</span>
+        </a>
+      </div>
     </>
   );
 }
