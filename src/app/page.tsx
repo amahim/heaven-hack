@@ -874,7 +874,7 @@ export default function Home() {
 
                 <div className="showroom-actions">
                   <a
-                    href="https://maps.app.goo.gl/1c8d5c27"
+                    href="https://www.google.com/maps/search/?api=1&query=Heaven+Furniture+Mart+Agrabad+Access+Road+Chattogram"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-primary"
@@ -1055,7 +1055,14 @@ export default function Home() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
-                  <span>Agrabad Access Road, Chattogram, Bangladesh</span>
+                  <a
+                    href="https://www.google.com/maps/search/?api=1&query=Heaven+Furniture+Mart+Agrabad+Access+Road+Chattogram"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: "inherit" }}
+                  >
+                    Agrabad Access Road, Chattogram, Bangladesh
+                  </a>
                 </div>
 
                 <div className="footer-contact-item">

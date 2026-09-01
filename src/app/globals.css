@@ -1675,7 +1675,7 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(30, 43, 44, 0.99);
   z-index: 1000;
   overflow-y: auto;
-  padding: 4rem 2.5rem;
+  padding: 3.5rem 2.5rem 4rem 2.5rem;
   display: flex;
   flex-direction: column;
   animation: fadeIn 0.3s ease-out;
@@ -1691,6 +1691,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0 auto 3rem auto;
   border-bottom: 1px solid rgba(244, 241, 233, 0.08);
   padding-bottom: 1.5rem;
+  padding-right: 4rem;
 }
 
 .gallery-modal-title-group {
@@ -1718,9 +1719,16 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
+/* Floating Sticky Cross Button */
 .gallery-close-btn {
-  background: transparent;
-  border: 1px solid rgba(244, 241, 233, 0.15);
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 1100;
+  background: rgba(20, 28, 29, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(244, 241, 233, 0.25);
   color: var(--color-ivory);
   width: 48px;
   height: 48px;
@@ -1740,13 +1748,15 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
   box-sizing: border-box;
   transition: var(--transition-quick);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .gallery-close-btn:hover {
   border-color: var(--color-gold);
   color: var(--color-gold);
-  background-color: rgba(200, 162, 38, 0.05);
-  transform: rotate(90deg);
+  background-color: var(--color-teal);
+  transform: rotate(90deg) scale(1.05);
+  box-shadow: 0 8px 24px rgba(200, 162, 38, 0.4);
 }
 
 /* Masonry Grid - keeps original aspect ratio and sizes, no fixed rows/columns */
@@ -1781,6 +1791,7 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 2rem;
     gap: 1rem;
     padding-bottom: 1.25rem;
+    padding-right: 3.25rem;
     align-items: center;
   }
   .gallery-modal-title-group {
@@ -1793,6 +1804,8 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.95rem;
   }
   .gallery-close-btn {
+    top: 1.25rem;
+    right: 1.25rem;
     width: 42px;
     height: 42px;
     min-width: 42px;
